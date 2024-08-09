@@ -1,0 +1,89 @@
+body {
+    background-color: #121212;
+    color: #ffffff; /* Ensuring text is readable against the very dark background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Changed for result alignment */
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin: 20px 0;
+    color: #ffffff; /* Ensure the header text is white for visibility */
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.form-box {
+    background-color: #1e1e1e;
+    padding: 20px;
+    margin: 10px; /* Adjusted margin for closer forms */
+    border-radius: 8px;
+    flex-grow: 1;
+    flex-basis: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #9c27b0; /* Purple accent for headings */
+}
+
+button {
+    background-color: #9c27b0;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #7b1fa2; /* A slightly darker purple for hover effect */
+}
+
+input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #292929;
+    color: #ffffff;
+}
+
+.forms-container {
+    display: flex;
+    flex-direction: column;  /* Stack vertically on mobile by default */
+    align-items: center;
+    width: 80%; /* Adjusted width for tighter grouping */
+    margin: 0 auto; /* Centering */
+}
+
+#output {
+    background-color: #292929 /* Lighter grey background */
+    padding: 20px; /* Adding some padding for better readability */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
+    color: #ffffff; /* Setting text color for better contrast with the lighter background */
+    margin-top: 20px; /* Ensures there's space between the forms and the result */
+    width: 80%; /* Keeps the width consistent with your form container */
+}
+
+/* Media query for screens wider than 768px */
+@media (min-width: 768px) {
+    .forms-container {
+        flex-direction: row; /* Now side-by-side */
+        justify-content: space-around;
+    }
+}

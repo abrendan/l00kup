@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>l00kup// - Domain Lookup Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>l00kup// - Domain Lookup Services</h1>
+    </header>
+    <p>Made by abrendan</p>
+    <div class="forms-container">
+        <div class="form-box" id="reverseLookupFormContainer">
+            <h1>Reverse Domain Lookup</h1>
+            <form id="reverseLookupForm">
+                <input type="text" id="reverseDomainInput" placeholder="Enter domain for Reverse Lookup" required>
+                <button type="submit">Reverse Lookup</button>
+            </form>
+        </div>
+        <div class="form-box" id="whoisLookupFormContainer">
+            <h1>WHOIS Lookup</h1>
+            <form id="whoisLookupForm">
+                <input type="text" id="whoisDomainInput" placeholder="Enter domain for WHOIS Lookup" required>
+                <button type="submit">WHOIS Lookup</button>
+            </form>
+        </div>
+    </div>
+    <div id="output"></div>
+
+    <script>
+        // Reverse Lookup
+        document.getElementById('reverseLookupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const domain = document.getElementById('reverseDomainInput').value;
+
+            fetch('/reverseLookup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ domain }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerHTML = `<h2>Reverse Lookup Result</h2><pre>${JSON.stringify(data, null, 2)}</pre>`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        // WHOIS Lookup
+        document.getElementById('whoisLookupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const domain = document.getElementById('whoisDomainInput').value;
+
+            fetch('/whoisLookup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ domain }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerHTML += `<h2>WHOIS Information</h2><pre>${data.whois}</pre>`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+
