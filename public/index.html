@@ -1,28 +1,26 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>l00kup// - Domain Lookup Services</title>
+    <title>Domain Lookups</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>l00kup// - Domain Lookup Services</h1>
     </header>
-    <p>Made by abrendan</p>
     <div class="forms-container">
         <div class="form-box" id="reverseLookupFormContainer">
-            <h1>Reverse Domain Lookup</h1>
+            <h1>DNS Lookup</h1>
             <form id="reverseLookupForm">
-                <input type="text" id="reverseDomainInput" placeholder="Enter domain for Reverse Lookup" required>
-                <button type="submit">Reverse Lookup</button>
+                <input type="text" id="reverseDomainInput" placeholder="Enter domain for DNS Lookup" required>
+                <button type="submit">Start</button>
             </form>
         </div>
         <div class="form-box" id="whoisLookupFormContainer">
             <h1>WHOIS Lookup</h1>
             <form id="whoisLookupForm">
                 <input type="text" id="whoisDomainInput" placeholder="Enter domain for WHOIS Lookup" required>
-                <button type="submit">WHOIS Lookup</button>
+                <button type="submit">Start</button>
             </form>
         </div>
     </div>
@@ -33,6 +31,7 @@
         document.getElementById('reverseLookupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const domain = document.getElementById('reverseDomainInput').value;
+            document.getElementById('output').innerHTML = ''; // Clear previous output
 
             fetch('/reverseLookup', {
                 method: 'POST',
@@ -54,6 +53,7 @@
         document.getElementById('whoisLookupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const domain = document.getElementById('whoisDomainInput').value;
+            document.getElementById('output').innerHTML = ''; // Clear previous output
 
             fetch('/whoisLookup', {
                 method: 'POST',
@@ -64,7 +64,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('output').innerHTML += `<h2>WHOIS Information</h2><pre>${data.whois}</pre>`;
+                document.getElementById('output').innerHTML = `<h2>WHOIS Information</h2><pre>${data.whois}</pre>`;
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -73,4 +73,3 @@
     </script>
 </body>
 </html>
-
