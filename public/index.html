@@ -7,12 +7,20 @@
 <body>
     <header>
         <h1>l00kup// - Domain Lookup Services</h1>
+        <a>by abrendan</a>
     </header>
     <div class="forms-container">
         <div class="form-box" id="reverseLookupFormContainer">
-            <h1>DNS Lookup</h1>
+            <h1>Domain Lookup</h1>
             <form id="reverseLookupForm">
                 <input type="text" id="reverseDomainInput" placeholder="Enter domain for DNS Lookup" required>
+                <button type="submit">Start</button>
+            </form>
+        </div>
+        <div class="form-box" id="reverseLookupByIPFormContainer">
+            <h1>Reverse Lookup by IP</h1>
+            <form id="reverseLookupByIPForm">
+                <input type="text" id="reverseIPInput" placeholder="Enter IP for Reverse Lookup" required>
                 <button type="submit">Start</button>
             </form>
         </div>
@@ -43,6 +51,28 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('output').innerHTML = `<h2>Reverse Lookup Result</h2><pre>${JSON.stringify(data, null, 2)}</pre>`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        // Reverse Lookup by IP
+        document.getElementById('reverseLookupByIPForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ip = document.getElementById('reverseIPInput').value;
+            document.getElementById('output').innerHTML = ''; // Clear previous output
+
+            fetch('/reverseLookupByIP', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ip }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerHTML = `<h2>Reverse Lookup by IP Result</h2><pre>${JSON.stringify(data, null, 2)}</pre>`;
             })
             .catch(error => {
                 console.error('Error:', error);

@@ -25,6 +25,18 @@ app.post('/reverseLookup', async (req, res) => {
     }
 });
 
+// Endpoint for performing reverse domain lookup by IP
+app.post('/reverseLookupByIP', async (req, res) => {
+    try {
+        const { ip } = req.body;
+        const reverseResult = await dns.reverse(ip);
+        res.json({ success: true, ip, reverseResult });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Reverse lookup failed', error: error.message });
+    }
+});
+
 app.post('/whoisLookup', (req, res) => {
     const { domain } = req.body;
     whois.lookup(domain, (err, data) => {
